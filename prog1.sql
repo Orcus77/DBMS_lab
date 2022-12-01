@@ -58,7 +58,17 @@ WHERE DATE_OUT BETWEEN '01-JAN-17' AND '30-JUN-17'
 GROUP BY L.CARD_NO
 HAVING COUNT(*)>3;
 
-/* Listng publishing years */
+/* View listng publishing years */
 CREATE VIEW PUB_YEAR AS
 SELECT PUB_YEAR
 FROM BOOK;
+
+/* View of all books and no. of copies */
+CREATE VIEW V_BOOKS AS
+SELECT B.BOOK_ID, C.NO_OF_COPIES, L.BRANCH_ID, B.TITLE
+FROM BOOK B, BOOK_COPIES C, LIBRARY_BRANCH L
+WHERE  B.BOOK_ID = C.BOOK_ID AND C.BRANCH_ID = L.BRANCH_ID;
+
+/* Delete book in book table and reflect the changes in another table */
+DELETE FROM BOOK
+WHERE BOOK_ID=1;
